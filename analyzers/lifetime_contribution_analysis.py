@@ -1,9 +1,40 @@
+#!/usr/bin/env python3
+"""
+Lifetime Contribution Analysis
+
+Analyzes GitHub contribution data across all years since account creation.
+"""
+
+import argparse
 import os
 from datetime import datetime
 
 import requests
 
-TOKEN = os.environ["GITHUB_TOKEN"]
+# Parse command-line arguments
+parser = argparse.ArgumentParser(
+    description='Analyze lifetime GitHub contributions',
+    formatter_class=argparse.RawDescriptionHelpFormatter,
+    epilog='''
+Examples:
+  %(prog)s -u octocat
+  %(prog)s -u octocat -t ghp_xxxxx
+  
+Environment Variables:
+  GITHUB_TOKEN    GitHub personal access token (alternative to -t)
+    '''
+)
+parser.add_argument('-u', '--user', type=str, required=True,
+                    help='GitHub username to analyze')
+parser.add_argument('-t', '--token', type=str, 
+                    help='GitHub personal access token (or set GITHUB_TOKEN environment variable)')
+args = parser.parse_args()
+
+# Get token from argument or environment variable
+TOKEN = args.token if args.token else os.environ.get("GITHUB_TOKEN")
+if not TOKEN:
+    print("Error: GitHub token required. Provide via -t/--token or GITHUB_TOKEN environment variable.")
+    exit(1)
 
 # First, get account creation date
 user_query = """
@@ -18,7 +49,7 @@ query($login: String!) {
 print("Fetching account information...")
 resp = requests.post(
     "https://api.github.com/graphql",
-    json={"query": user_query, "variables": {"login": "joelbrostrom"}},
+    json={"query": user_query, "variables": {"login": args.user}},
     headers={"Authorization": f"bearer {TOKEN}"}
 )
 resp.raise_for_status()
@@ -33,7 +64,7 @@ account_created = datetime.fromisoformat(user_info["createdAt"].replace("Z", "+0
 account_created_year = account_created.year
 current_year = datetime.now().year
 
-print(f"Account: {user_info['name']} (@joelbrostrom)")
+print(f"Account: {user_info['name']} (@{args.user})")
 print(f"Member since: {account_created.strftime('%B %d, %Y')}")
 print(f"Analyzing {current_year - account_created_year + 1} years of contributions...\n")
 
@@ -73,7 +104,7 @@ for year in range(account_created_year, current_year + 1):
         to_date = f"{year}-12-31T23:59:59Z"
     
     variables = {
-        "login": "joelbrostrom",
+        "login": args.user,
         "from": from_date,
         "to": to_date
     }

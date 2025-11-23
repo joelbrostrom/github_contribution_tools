@@ -1,10 +1,41 @@
+#!/usr/bin/env python3
+"""
+Fetch Commit Contributions for 2025
+
+Fetches and analyzes GitHub contribution data for the year 2025.
+"""
+
+import argparse
 import os
 from collections import Counter
 from datetime import datetime
 
 import requests
 
-TOKEN = os.environ["GITHUB_TOKEN"]
+# Parse command-line arguments
+parser = argparse.ArgumentParser(
+    description='Fetch and analyze GitHub contributions for 2025',
+    formatter_class=argparse.RawDescriptionHelpFormatter,
+    epilog='''
+Examples:
+  %(prog)s -u octocat
+  %(prog)s -u octocat -t ghp_xxxxx
+  
+Environment Variables:
+  GITHUB_TOKEN    GitHub personal access token (alternative to -t)
+    '''
+)
+parser.add_argument('-u', '--user', type=str, required=True,
+                    help='GitHub username to analyze')
+parser.add_argument('-t', '--token', type=str, 
+                    help='GitHub personal access token (or set GITHUB_TOKEN environment variable)')
+args = parser.parse_args()
+
+# Get token from argument or environment variable
+TOKEN = args.token if args.token else os.environ.get("GITHUB_TOKEN")
+if not TOKEN:
+    print("Error: GitHub token required. Provide via -t/--token or GITHUB_TOKEN environment variable.")
+    exit(1)
 
 # Query using contribution calendar which includes ALL repositories (personal + org)
 query = """
@@ -30,7 +61,7 @@ query($login: String!, $from: DateTime!, $to: DateTime!) {
 """
 
 variables = {
-    "login": "joelbrostrom",
+    "login": args.user,
     "from": "2025-01-01T00:00:00Z",
     "to": "2025-12-31T23:59:59Z"
 }
