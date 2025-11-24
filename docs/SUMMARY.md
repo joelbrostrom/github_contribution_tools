@@ -98,8 +98,8 @@ python3 monthly_productivity_analysis.py -u username
 | Script | Configurable? | Documentation | Status |
 |--------|---------------|---------------|--------|
 | `monthly_productivity_analysis.py` | ✅ Yes | ✅ Complete | 🟢 Production Ready |
-| `lifetime_contribution_analysis.py` | ⚠️ Partial | ✅ Documented | 🟡 Usable (needs username edit) |
-| `fetch_commit_contributions_2025.py` | ⚠️ Partial | ✅ Documented | 🟡 Usable (needs username edit) |
+| `lifetime_contribution_analysis.py` | ✅ Yes | ✅ Complete | 🟢 Production Ready |
+| `yearly_contribution_summary.py` | ✅ Yes | ✅ Complete | 🟢 Production Ready |
 
 ## 🎓 Documentation Levels
 

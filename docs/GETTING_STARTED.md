@@ -200,8 +200,8 @@ Now that you're up and running:
 
 1. Try the `--detailed` flag to see all your monthly data
 2. Check out other scripts:
-   - `analyzers/lifetime_contribution_analysis.py` - Year-by-year history
-   - `analyzers/fetch_commit_contributions_2025.py` - Weekly patterns
+   - `analyzers/lifetime_contribution_analysis.py -u your_username` - Year-by-year history
+   - `analyzers/yearly_contribution_summary.py -u your_username` - Yearly summary with weekday patterns
 3. Read docs/README.md for advanced features
 
 ## 🎓 Understanding the Terminal

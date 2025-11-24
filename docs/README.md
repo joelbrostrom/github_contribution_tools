@@ -95,11 +95,12 @@ python3 analyzers/monthly_productivity_analysis.py -u your_username -t ghp_xxxxx
 Shows year-over-year statistics from account creation.
 
 ```bash
-export GITHUB_TOKEN=your_token
-python3 analyzers/lifetime_contribution_analysis.py
-```
+# Basic usage
+python3 analyzers/lifetime_contribution_analysis.py -u your_username
 
-**Note:** Currently requires editing the script to set your username (line 22).
+# Pass token directly (or use GITHUB_TOKEN environment variable)
+python3 analyzers/lifetime_contribution_analysis.py -u your_username -t ghp_xxxxx
+```
 
 **Shows:**
 - Contributions by year
@@ -107,16 +108,17 @@ python3 analyzers/lifetime_contribution_analysis.py
 - Breakdown by type (commits, PRs, issues, reviews)
 - Historical trends
 
-### Weekly Pattern Analysis
+### Yearly Contribution Summary
 
-Analyzes contribution patterns by weekday for 2025.
+Analyzes contribution patterns by weekday for the current year.
 
 ```bash
-export GITHUB_TOKEN=your_token
-python3 analyzers/fetch_commit_contributions_2025.py
-```
+# Basic usage
+python3 analyzers/yearly_contribution_summary.py -u your_username
 
-**Note:** Currently requires editing the script to set your username (line 22).
+# Pass token directly (or use GITHUB_TOKEN environment variable)
+python3 analyzers/yearly_contribution_summary.py -u your_username -t ghp_xxxxx
+```
 
 **Shows:**
 - Contributions per weekday
@@ -141,7 +143,7 @@ github-contribution-analyzer/
 ├── analyzers/                          # Analysis scripts
 │   ├── monthly_productivity_analysis.py
 │   ├── lifetime_contribution_analysis.py
-│   └── fetch_commit_contributions_2025.py
+│   └── yearly_contribution_summary.py
 ├── .gitignore                          # Git ignore rules
 ├── LICENSE                             # MIT License
 ├── README.md                           # Symlink to docs/README.md
@@ -224,7 +226,12 @@ GitHub API has rate limits. Wait an hour or use an authenticated token (which yo
 
 ### Script Shows Wrong Username
 
-The `lifetime_contribution_analysis.py` and `fetch_commit_contributions_2025.py` scripts currently have hardcoded usernames. Edit the files and replace the username on line 22.
+All scripts now accept a `-u` or `--user` argument. Make sure you're passing your correct GitHub username:
+
+```bash
+python3 analyzers/lifetime_contribution_analysis.py -u your_username
+python3 analyzers/yearly_contribution_summary.py -u your_username
+```
 
 ## 📊 Understanding the Output
 

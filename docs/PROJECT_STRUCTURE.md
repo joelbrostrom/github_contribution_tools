@@ -20,7 +20,7 @@ github-contribution-analyzer/
 ├── 📁 analyzers/                          # Analysis scripts
 │   ├── monthly_productivity_analysis.py   # ⭐ Main analyzer (fully configurable)
 │   ├── lifetime_contribution_analysis.py  # Year-over-year analysis
-│   └── fetch_commit_contributions_2025.py # Weekly pattern for 2025
+│   └── yearly_contribution_summary.py     # Yearly contribution summary
 │
 ├── 📄 .gitignore                          # Git ignore rules
 ├── 📄 LICENSE                             # MIT License
@@ -74,8 +74,8 @@ All the analyzer scripts:
 | Script | Status | Description |
 |--------|--------|-------------|
 | **monthly_productivity_analysis.py** | ✅ Fully Configurable | Main script with beautiful terminal graphs, trend analysis, and productivity metrics |
-| **lifetime_contribution_analysis.py** | ⚠️ Requires username edit | Year-over-year statistics from account creation |
-| **fetch_commit_contributions_2025.py** | ⚠️ Requires username edit | Weekly contribution patterns for 2025 |
+| **lifetime_contribution_analysis.py** | ✅ Fully Configurable | Year-over-year statistics from account creation |
+| **yearly_contribution_summary.py** | ✅ Fully Configurable | Yearly contribution summary with weekday patterns |
 
 ## 🎯 For New Users
 
