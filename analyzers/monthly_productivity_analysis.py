@@ -145,8 +145,8 @@ for year in range(account_created_year, current_year + 1):
 
 print(f"\nTotal days tracked: {len(all_contributions)}")
 
-# Group by week (ISO week) and calculate weekly totals
-weekly_stats = defaultdict(lambda: {"total": 0, "month": None})
+# Group by week (ISO week) but track which days belong to which months
+weekly_stats = defaultdict(lambda: {"days_by_month": defaultdict(lambda: {"count": 0, "contributions": 0})})
 
 for contrib in all_contributions:
     date = datetime.fromisoformat(contrib["date"])
@@ -155,30 +155,29 @@ for contrib in all_contributions:
     week_key = f"{iso_year}-W{iso_week:02d}"
     month_key = date.strftime("%Y-%m")
     
-    weekly_stats[week_key]["total"] += contrib["count"]
-    if weekly_stats[week_key]["month"] is None:
-        weekly_stats[week_key]["month"] = month_key
+    # Track contributions per day and which month each day belongs to
+    weekly_stats[week_key]["days_by_month"][month_key]["count"] += 1
+    weekly_stats[week_key]["days_by_month"][month_key]["contributions"] += contrib["count"]
 
-# Calculate average per workday for each week
+# Calculate per-workday averages and assign to months
 workdays_per_week = args.workdays_per_week
-weekly_averages = {}
+monthly_stats = defaultdict(lambda: {"total": 0, "week_fraction": 0})
 
-for week_key, stats in weekly_stats.items():
-    avg_per_workday = stats["total"] / workdays_per_week
-    weekly_averages[week_key] = {
-        "avg": avg_per_workday,
-        "total": stats["total"],
-        "month": stats["month"]
-    }
-
-# Group weekly averages by month
-monthly_stats = defaultdict(lambda: {"total": 0, "weeks": 0, "avg_sum": 0})
-
-for week_key, week_data in weekly_averages.items():
-    month_key = week_data["month"]
-    monthly_stats[month_key]["total"] += week_data["total"]
-    monthly_stats[month_key]["weeks"] += 1
-    monthly_stats[month_key]["avg_sum"] += week_data["avg"]
+for week_key, week_data in weekly_stats.items():
+    # Get total days in this week (should be 7 for complete weeks)
+    total_days_in_week = sum(m["count"] for m in week_data["days_by_month"].values())
+    
+    # Split this week's contribution across the months it spans
+    for month_key, month_data in week_data["days_by_month"].items():
+        days_in_this_month = month_data["count"]
+        contributions_in_this_month = month_data["contributions"]
+        
+        # Calculate what fraction of the week belongs to this month
+        week_fraction = days_in_this_month / 7.0
+        
+        # Assign contributions and week fraction to the month
+        monthly_stats[month_key]["total"] += contributions_in_this_month
+        monthly_stats[month_key]["week_fraction"] += week_fraction
 
 # Sort by month
 sorted_months = sorted(monthly_stats.items())
@@ -187,7 +186,10 @@ sorted_months = sorted(monthly_stats.items())
 monthly_data = []
 
 for month_key, stats in sorted_months:
-    avg_per_workday = stats["avg_sum"] / stats["weeks"] if stats["weeks"] > 0 else 0
+    # Calculate average per workday
+    # Total workdays in the month = week_fraction * workdays_per_week
+    total_workdays = stats["week_fraction"] * workdays_per_week
+    avg_per_workday = stats["total"] / total_workdays if total_workdays > 0 else 0
     
     # Format month nicely
     month_date = datetime.strptime(month_key, "%Y-%m")
@@ -198,7 +200,7 @@ for month_key, stats in sorted_months:
         "label": month_label,
         "avg": avg_per_workday,
         "total": stats["total"],
-        "weeks": stats["weeks"]
+        "week_fraction": stats["week_fraction"]
     })
 
 # Show detailed monthly breakdown if flag is set
@@ -212,7 +214,7 @@ if args.detailed:
     for month_data_item in monthly_data:
         month_key = month_data_item["month"]
         stats = monthly_stats[month_key]
-        print(f"{month_data_item['label']:<12} {stats['total']:<8} {stats['weeks']:<8} "
+        print(f"{month_data_item['label']:<12} {stats['total']:<8} {stats['week_fraction']:<8.2f} "
               f"{month_data_item['avg']:>14.2f}")
     
     print()
@@ -335,7 +337,7 @@ export_data = {
             "label": m["label"],
             "average_per_workday": m["avg"],
             "total_contributions": m["total"],
-            "weeks": m["weeks"]
+            "week_fraction": m["week_fraction"]
         }
         for m in monthly_data
     ]
