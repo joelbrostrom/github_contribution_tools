@@ -23,6 +23,7 @@ parser = argparse.ArgumentParser(
 Examples:
   %(prog)s -u octocat
   %(prog)s -u octocat -t ghp_xxxxx --detailed
+  %(prog)s -u octocat --workdays-per-week 6
   
 Environment Variables:
   GITHUB_TOKEN    GitHub personal access token (alternative to -t)
@@ -34,6 +35,8 @@ parser.add_argument('-t', '--token', type=str,
                     help='GitHub personal access token (or set GITHUB_TOKEN environment variable)')
 parser.add_argument('--detailed', action='store_true', 
                     help='Show detailed monthly breakdown table')
+parser.add_argument('--workdays-per-week', type=int, default=5,
+                    help='Number of workdays per week (default: 5 for Mon-Fri)')
 args = parser.parse_args()
 
 # Get token from argument or environment variable
@@ -142,18 +145,40 @@ for year in range(account_created_year, current_year + 1):
 
 print(f"\nTotal days tracked: {len(all_contributions)}")
 
-# Group by month and calculate averages
-monthly_stats = defaultdict(lambda: {"total": 0, "active_days": 0, "total_days": 0})
+# Group by week (ISO week) and calculate weekly totals
+weekly_stats = defaultdict(lambda: {"total": 0, "month": None})
 
 for contrib in all_contributions:
     date = datetime.fromisoformat(contrib["date"])
-    month_key = date.strftime("%Y-%m")  # Format: 2017-03
+    # Get ISO week number (year, week_number)
+    iso_year, iso_week, _ = date.isocalendar()
+    week_key = f"{iso_year}-W{iso_week:02d}"
+    month_key = date.strftime("%Y-%m")
     
-    monthly_stats[month_key]["total"] += contrib["count"]
-    monthly_stats[month_key]["total_days"] += 1
-    
-    if contrib["count"] > 0:
-        monthly_stats[month_key]["active_days"] += 1
+    weekly_stats[week_key]["total"] += contrib["count"]
+    if weekly_stats[week_key]["month"] is None:
+        weekly_stats[week_key]["month"] = month_key
+
+# Calculate average per workday for each week
+workdays_per_week = args.workdays_per_week
+weekly_averages = {}
+
+for week_key, stats in weekly_stats.items():
+    avg_per_workday = stats["total"] / workdays_per_week
+    weekly_averages[week_key] = {
+        "avg": avg_per_workday,
+        "total": stats["total"],
+        "month": stats["month"]
+    }
+
+# Group weekly averages by month
+monthly_stats = defaultdict(lambda: {"total": 0, "weeks": 0, "avg_sum": 0})
+
+for week_key, week_data in weekly_averages.items():
+    month_key = week_data["month"]
+    monthly_stats[month_key]["total"] += week_data["total"]
+    monthly_stats[month_key]["weeks"] += 1
+    monthly_stats[month_key]["avg_sum"] += week_data["avg"]
 
 # Sort by month
 sorted_months = sorted(monthly_stats.items())
@@ -162,7 +187,7 @@ sorted_months = sorted(monthly_stats.items())
 monthly_data = []
 
 for month_key, stats in sorted_months:
-    avg_per_active_day = stats["total"] / stats["active_days"] if stats["active_days"] > 0 else 0
+    avg_per_workday = stats["avg_sum"] / stats["weeks"] if stats["weeks"] > 0 else 0
     
     # Format month nicely
     month_date = datetime.strptime(month_key, "%Y-%m")
@@ -171,24 +196,24 @@ for month_key, stats in sorted_months:
     monthly_data.append({
         "month": month_key,
         "label": month_label,
-        "avg": avg_per_active_day,
+        "avg": avg_per_workday,
         "total": stats["total"],
-        "active_days": stats["active_days"]
+        "weeks": stats["weeks"]
     })
 
 # Show detailed monthly breakdown if flag is set
 if args.detailed:
     print("\n" + "="*90)
-    print("MONTHLY PRODUCTIVITY ANALYSIS (Average Contributions per Active Day)")
+    print(f"MONTHLY PRODUCTIVITY ANALYSIS (Average Contributions per Workday, {workdays_per_week} workdays/week)")
     print("="*90)
-    print(f"\n{'Month':<12} {'Total':<8} {'Active Days':<12} {'Total Days':<12} {'Avg/Active Day':<15}")
+    print(f"\n{'Month':<12} {'Total':<8} {'Weeks':<8} {'Avg/Workday':<15}")
     print("-"*90)
     
     for month_data_item in monthly_data:
         month_key = month_data_item["month"]
         stats = monthly_stats[month_key]
-        print(f"{month_data_item['label']:<12} {stats['total']:<8} {stats['active_days']:<12} "
-              f"{stats['total_days']:<12} {month_data_item['avg']:>14.2f}")
+        print(f"{month_data_item['label']:<12} {stats['total']:<8} {stats['weeks']:<8} "
+              f"{month_data_item['avg']:>14.2f}")
     
     print()
 
@@ -204,7 +229,7 @@ if all_averages:
     min_month = min([m for m in monthly_data if m["avg"] > 0], key=lambda x: x["avg"])
     
     print(f"Total months analyzed:      {len(monthly_data)}")
-    print(f"Overall average:            {overall_avg:.2f} contributions/active day")
+    print(f"Overall average:            {overall_avg:.2f} contributions/workday")
     print(f"Most productive month:      {max_month['label']} ({max_month['avg']:.2f} avg)")
     print(f"Least productive month:     {min_month['label']} ({min_month['avg']:.2f} avg)")
     
@@ -212,7 +237,7 @@ if all_averages:
     recent_months = monthly_data[-12:] if len(monthly_data) >= 12 else monthly_data
     recent_avg = sum(m["avg"] for m in recent_months) / len(recent_months) if recent_months else 0
     
-    print(f"\nLast 12 months average:     {recent_avg:.2f} contributions/active day")
+    print(f"\nLast 12 months average:     {recent_avg:.2f} contributions/workday")
 
 # Create visual graph using plotext
 print("\n" + "="*90)
@@ -233,7 +258,7 @@ if active_months:
     # Create the main plot
     plt.clear_figure()
     plt.plot_size(120, 30)
-    plt.title("Monthly Productivity: Average Contributions per Active Day")
+    plt.title(f"Monthly Productivity: Average Contributions per Workday ({workdays_per_week} workdays/week)")
     
     # Plot the line
     plt.plot(x_indices, averages, marker="braille", color="cyan")
@@ -251,7 +276,7 @@ if active_months:
         plt.plot(x_indices, moving_avg, marker="braille", color="green", label="6-month trend")
     
     plt.xlabel("Timeline")
-    plt.ylabel("Avg Contributions/Active Day")
+    plt.ylabel("Avg Contributions/Workday")
     
     # Set x-axis labels (show every Nth label to avoid crowding)
     step = max(1, len(labels) // 20)  # Show ~20 labels
@@ -275,8 +300,8 @@ if active_months:
     
     if older_avg > 0:
         improvement = ((recent_avg - older_avg) / older_avg) * 100
-        print(f"Last 12 months average:         {recent_avg:.2f} contributions/active day")
-        print(f"Historical average (before):    {older_avg:.2f} contributions/active day")
+        print(f"Last 12 months average:         {recent_avg:.2f} contributions/workday")
+        print(f"Historical average (before):    {older_avg:.2f} contributions/workday")
         print(f"Improvement:                    {improvement:+.1f}%")
     
     # Recent trend
@@ -290,8 +315,8 @@ if active_months:
             print(f"Recent trend (last 3 months):   {recent_trend:+.1f}% {trend_emoji}")
     
     print("="*90)
-    print("Note: Only days with contributions are counted in averages")
-    print("This filters out vacations, weekends, and non-working periods")
+    print(f"Note: Averages calculated as weekly total ÷ {workdays_per_week} workdays")
+    print("This normalizes for weekends and provides consistent per-workday metrics")
     print("="*90 + "\n")
 else:
     print("No active months to display.")
@@ -303,13 +328,14 @@ print("Exporting data for plotting...")
 export_data = {
     "user": args.user,
     "generated": datetime.now().isoformat(),
+    "workdays_per_week": workdays_per_week,
     "monthly_data": [
         {
             "month": m["month"],
             "label": m["label"],
-            "average_per_active_day": m["avg"],
+            "average_per_workday": m["avg"],
             "total_contributions": m["total"],
-            "active_days": m["active_days"]
+            "weeks": m["weeks"]
         }
         for m in monthly_data
     ]

@@ -1,741 +1,742 @@
 {
   "user": "joelbrostrom",
-  "generated": "2025-11-23T23:43:36.485762",
+  "generated": "2025-11-24T10:49:52.781102",
+  "workdays_per_week": 7,
   "monthly_data": [
     {
       "month": "2017-03",
       "label": "Mar 2017",
-      "average_per_active_day": 1.0,
+      "average_per_workday": 0.14285714285714285,
       "total_contributions": 1,
-      "active_days": 1
+      "weeks": 1
     },
     {
       "month": "2017-04",
       "label": "Apr 2017",
-      "average_per_active_day": 0,
+      "average_per_workday": 0.0,
       "total_contributions": 0,
-      "active_days": 0
+      "weeks": 4
     },
     {
       "month": "2017-05",
       "label": "May 2017",
-      "average_per_active_day": 0,
+      "average_per_workday": 0.0,
       "total_contributions": 0,
-      "active_days": 0
+      "weeks": 5
     },
     {
       "month": "2017-06",
       "label": "Jun 2017",
-      "average_per_active_day": 0,
+      "average_per_workday": 0.0,
       "total_contributions": 0,
-      "active_days": 0
+      "weeks": 4
     },
     {
       "month": "2017-07",
       "label": "Jul 2017",
-      "average_per_active_day": 0,
+      "average_per_workday": 0.0,
       "total_contributions": 0,
-      "active_days": 0
+      "weeks": 5
     },
     {
       "month": "2017-08",
       "label": "Aug 2017",
-      "average_per_active_day": 1.0,
+      "average_per_workday": 0.03571428571428571,
       "total_contributions": 1,
-      "active_days": 1
+      "weeks": 4
     },
     {
       "month": "2017-09",
       "label": "Sep 2017",
-      "average_per_active_day": 1.3333333333333333,
+      "average_per_workday": 0.14285714285714285,
       "total_contributions": 4,
-      "active_days": 3
+      "weeks": 4
     },
     {
       "month": "2017-10",
       "label": "Oct 2017",
-      "average_per_active_day": 1.8,
-      "total_contributions": 9,
-      "active_days": 5
+      "average_per_workday": 0.37142857142857144,
+      "total_contributions": 13,
+      "weeks": 5
     },
     {
       "month": "2017-11",
       "label": "Nov 2017",
-      "average_per_active_day": 3.3333333333333335,
-      "total_contributions": 50,
-      "active_days": 15
+      "average_per_workday": 1.6428571428571428,
+      "total_contributions": 46,
+      "weeks": 4
     },
     {
       "month": "2017-12",
       "label": "Dec 2017",
-      "average_per_active_day": 3.5,
+      "average_per_workday": 1.25,
       "total_contributions": 35,
-      "active_days": 10
+      "weeks": 4
     },
     {
       "month": "2018-01",
       "label": "Jan 2018",
-      "average_per_active_day": 2.076923076923077,
-      "total_contributions": 27,
-      "active_days": 13
+      "average_per_workday": 0.8857142857142856,
+      "total_contributions": 31,
+      "weeks": 5
     },
     {
       "month": "2018-02",
       "label": "Feb 2018",
-      "average_per_active_day": 2.5,
-      "total_contributions": 40,
-      "active_days": 16
+      "average_per_workday": 1.3571428571428572,
+      "total_contributions": 38,
+      "weeks": 4
     },
     {
       "month": "2018-03",
       "label": "Mar 2018",
-      "average_per_active_day": 5.214285714285714,
-      "total_contributions": 73,
-      "active_days": 14
+      "average_per_workday": 2.5357142857142856,
+      "total_contributions": 71,
+      "weeks": 4
     },
     {
       "month": "2018-04",
       "label": "Apr 2018",
-      "average_per_active_day": 2.8,
-      "total_contributions": 28,
-      "active_days": 10
+      "average_per_workday": 1.3142857142857143,
+      "total_contributions": 46,
+      "weeks": 5
     },
     {
       "month": "2018-05",
       "label": "May 2018",
-      "average_per_active_day": 6.1875,
-      "total_contributions": 99,
-      "active_days": 16
+      "average_per_workday": 2.8928571428571432,
+      "total_contributions": 81,
+      "weeks": 4
     },
     {
       "month": "2018-06",
       "label": "Jun 2018",
-      "average_per_active_day": 4.428571428571429,
+      "average_per_workday": 1.1071428571428572,
       "total_contributions": 31,
-      "active_days": 7
+      "weeks": 4
     },
     {
       "month": "2018-07",
       "label": "Jul 2018",
-      "average_per_active_day": 5.117647058823529,
-      "total_contributions": 87,
-      "active_days": 17
+      "average_per_workday": 2.8000000000000003,
+      "total_contributions": 98,
+      "weeks": 5
     },
     {
       "month": "2018-08",
       "label": "Aug 2018",
-      "average_per_active_day": 6.8125,
-      "total_contributions": 109,
-      "active_days": 16
+      "average_per_workday": 3.5,
+      "total_contributions": 98,
+      "weeks": 4
     },
     {
       "month": "2018-09",
       "label": "Sep 2018",
-      "average_per_active_day": 7.3,
+      "average_per_workday": 2.607142857142857,
       "total_contributions": 73,
-      "active_days": 10
+      "weeks": 4
     },
     {
       "month": "2018-10",
       "label": "Oct 2018",
-      "average_per_active_day": 9.75,
-      "total_contributions": 156,
-      "active_days": 16
+      "average_per_workday": 4.685714285714285,
+      "total_contributions": 164,
+      "weeks": 5
     },
     {
       "month": "2018-11",
       "label": "Nov 2018",
-      "average_per_active_day": 11.608695652173912,
-      "total_contributions": 267,
-      "active_days": 23
+      "average_per_workday": 9.25,
+      "total_contributions": 259,
+      "weeks": 4
     },
     {
       "month": "2018-12",
       "label": "Dec 2018",
-      "average_per_active_day": 6.0,
+      "average_per_workday": 0.5142857142857142,
       "total_contributions": 18,
-      "active_days": 3
+      "weeks": 5
     },
     {
       "month": "2019-01",
       "label": "Jan 2019",
-      "average_per_active_day": 7.0,
-      "total_contributions": 28,
-      "active_days": 4
+      "average_per_workday": 1.0714285714285714,
+      "total_contributions": 30,
+      "weeks": 4
     },
     {
       "month": "2019-02",
       "label": "Feb 2019",
-      "average_per_active_day": 3.0,
-      "total_contributions": 21,
-      "active_days": 7
+      "average_per_workday": 0.7142857142857143,
+      "total_contributions": 20,
+      "weeks": 4
     },
     {
       "month": "2019-03",
       "label": "Mar 2019",
-      "average_per_active_day": 2.7777777777777777,
-      "total_contributions": 25,
-      "active_days": 9
+      "average_per_workday": 0.8571428571428571,
+      "total_contributions": 24,
+      "weeks": 4
     },
     {
       "month": "2019-04",
       "label": "Apr 2019",
-      "average_per_active_day": 5.777777777777778,
+      "average_per_workday": 1.4857142857142858,
       "total_contributions": 52,
-      "active_days": 9
+      "weeks": 5
     },
     {
       "month": "2019-05",
       "label": "May 2019",
-      "average_per_active_day": 3.0,
+      "average_per_workday": 0.4285714285714286,
       "total_contributions": 12,
-      "active_days": 4
+      "weeks": 4
     },
     {
       "month": "2019-06",
       "label": "Jun 2019",
-      "average_per_active_day": 1.75,
+      "average_per_workday": 0.25,
       "total_contributions": 7,
-      "active_days": 4
+      "weeks": 4
     },
     {
       "month": "2019-07",
       "label": "Jul 2019",
-      "average_per_active_day": 9.214285714285714,
+      "average_per_workday": 3.6857142857142855,
       "total_contributions": 129,
-      "active_days": 14
+      "weeks": 5
     },
     {
       "month": "2019-08",
       "label": "Aug 2019",
-      "average_per_active_day": 8.375,
+      "average_per_workday": 4.785714285714286,
       "total_contributions": 134,
-      "active_days": 16
+      "weeks": 4
     },
     {
       "month": "2019-09",
       "label": "Sep 2019",
-      "average_per_active_day": 8.75,
-      "total_contributions": 140,
-      "active_days": 16
+      "average_per_workday": 5.2,
+      "total_contributions": 182,
+      "weeks": 5
     },
     {
       "month": "2019-10",
       "label": "Oct 2019",
-      "average_per_active_day": 8.6,
-      "total_contributions": 172,
-      "active_days": 20
+      "average_per_workday": 4.678571428571429,
+      "total_contributions": 131,
+      "weeks": 4
     },
     {
       "month": "2019-11",
       "label": "Nov 2019",
-      "average_per_active_day": 9.263157894736842,
-      "total_contributions": 176,
-      "active_days": 19
+      "average_per_workday": 6.25,
+      "total_contributions": 175,
+      "weeks": 4
     },
     {
       "month": "2019-12",
       "label": "Dec 2019",
-      "average_per_active_day": 4.857142857142857,
-      "total_contributions": 34,
-      "active_days": 7
+      "average_per_workday": 1.1428571428571428,
+      "total_contributions": 40,
+      "weeks": 5
     },
     {
       "month": "2020-01",
       "label": "Jan 2020",
-      "average_per_active_day": 3.0,
-      "total_contributions": 15,
-      "active_days": 5
+      "average_per_workday": 0.3214285714285714,
+      "total_contributions": 9,
+      "weeks": 4
     },
     {
       "month": "2020-02",
       "label": "Feb 2020",
-      "average_per_active_day": 4.0,
+      "average_per_workday": 0.5714285714285714,
       "total_contributions": 16,
-      "active_days": 4
+      "weeks": 4
     },
     {
       "month": "2020-03",
       "label": "Mar 2020",
-      "average_per_active_day": 0,
+      "average_per_workday": 0.0,
       "total_contributions": 0,
-      "active_days": 0
+      "weeks": 5
     },
     {
       "month": "2020-04",
       "label": "Apr 2020",
-      "average_per_active_day": 0,
+      "average_per_workday": 0.0,
       "total_contributions": 0,
-      "active_days": 0
+      "weeks": 4
     },
     {
       "month": "2020-05",
       "label": "May 2020",
-      "average_per_active_day": 1.0,
+      "average_per_workday": 0.03571428571428571,
       "total_contributions": 1,
-      "active_days": 1
+      "weeks": 4
     },
     {
       "month": "2020-06",
       "label": "Jun 2020",
-      "average_per_active_day": 0,
+      "average_per_workday": 0.0,
       "total_contributions": 0,
-      "active_days": 0
+      "weeks": 5
     },
     {
       "month": "2020-07",
       "label": "Jul 2020",
-      "average_per_active_day": 0,
+      "average_per_workday": 0.0,
       "total_contributions": 0,
-      "active_days": 0
+      "weeks": 4
     },
     {
       "month": "2020-08",
       "label": "Aug 2020",
-      "average_per_active_day": 7.75,
+      "average_per_workday": 0.8857142857142858,
       "total_contributions": 31,
-      "active_days": 4
+      "weeks": 5
     },
     {
       "month": "2020-09",
       "label": "Sep 2020",
-      "average_per_active_day": 5.75,
+      "average_per_workday": 1.6428571428571426,
       "total_contributions": 46,
-      "active_days": 8
+      "weeks": 4
     },
     {
       "month": "2020-10",
       "label": "Oct 2020",
-      "average_per_active_day": 9.615384615384615,
+      "average_per_workday": 4.464285714285714,
       "total_contributions": 125,
-      "active_days": 13
+      "weeks": 4
     },
     {
       "month": "2020-11",
       "label": "Nov 2020",
-      "average_per_active_day": 0,
+      "average_per_workday": 0.0,
       "total_contributions": 0,
-      "active_days": 0
+      "weeks": 5
     },
     {
       "month": "2020-12",
       "label": "Dec 2020",
-      "average_per_active_day": 0,
+      "average_per_workday": 0.0,
       "total_contributions": 0,
-      "active_days": 0
+      "weeks": 4
     },
     {
       "month": "2021-01",
       "label": "Jan 2021",
-      "average_per_active_day": 4.5,
+      "average_per_workday": 0.3214285714285714,
       "total_contributions": 9,
-      "active_days": 2
+      "weeks": 4
     },
     {
       "month": "2021-02",
       "label": "Feb 2021",
-      "average_per_active_day": 7.416666666666667,
+      "average_per_workday": 3.1785714285714284,
       "total_contributions": 89,
-      "active_days": 12
+      "weeks": 4
     },
     {
       "month": "2021-03",
       "label": "Mar 2021",
-      "average_per_active_day": 7.625,
+      "average_per_workday": 1.7428571428571427,
       "total_contributions": 61,
-      "active_days": 8
+      "weeks": 5
     },
     {
       "month": "2021-04",
       "label": "Apr 2021",
-      "average_per_active_day": 1.0,
+      "average_per_workday": 0.03571428571428571,
       "total_contributions": 1,
-      "active_days": 1
+      "weeks": 4
     },
     {
       "month": "2021-05",
       "label": "May 2021",
-      "average_per_active_day": 0,
+      "average_per_workday": 0.0,
       "total_contributions": 0,
-      "active_days": 0
+      "weeks": 5
     },
     {
       "month": "2021-06",
       "label": "Jun 2021",
-      "average_per_active_day": 0,
+      "average_per_workday": 0.0,
       "total_contributions": 0,
-      "active_days": 0
+      "weeks": 4
     },
     {
       "month": "2021-07",
       "label": "Jul 2021",
-      "average_per_active_day": 0,
+      "average_per_workday": 0.0,
       "total_contributions": 0,
-      "active_days": 0
+      "weeks": 4
     },
     {
       "month": "2021-08",
       "label": "Aug 2021",
-      "average_per_active_day": 0,
+      "average_per_workday": 0.0,
       "total_contributions": 0,
-      "active_days": 0
+      "weeks": 5
     },
     {
       "month": "2021-09",
       "label": "Sep 2021",
-      "average_per_active_day": 2.0,
-      "total_contributions": 2,
-      "active_days": 1
+      "average_per_workday": 0.10714285714285714,
+      "total_contributions": 3,
+      "weeks": 4
     },
     {
       "month": "2021-10",
       "label": "Oct 2021",
-      "average_per_active_day": 1.0,
-      "total_contributions": 1,
-      "active_days": 1
+      "average_per_workday": 0.0,
+      "total_contributions": 0,
+      "weeks": 4
     },
     {
       "month": "2021-11",
       "label": "Nov 2021",
-      "average_per_active_day": 0,
+      "average_per_workday": 0.0,
       "total_contributions": 0,
-      "active_days": 0
+      "weeks": 5
     },
     {
       "month": "2021-12",
       "label": "Dec 2021",
-      "average_per_active_day": 0,
+      "average_per_workday": 0.0,
       "total_contributions": 0,
-      "active_days": 0
+      "weeks": 4
     },
     {
       "month": "2022-01",
       "label": "Jan 2022",
-      "average_per_active_day": 1.0,
+      "average_per_workday": 0.02857142857142857,
       "total_contributions": 1,
-      "active_days": 1
+      "weeks": 5
     },
     {
       "month": "2022-02",
       "label": "Feb 2022",
-      "average_per_active_day": 0,
+      "average_per_workday": 0.0,
       "total_contributions": 0,
-      "active_days": 0
+      "weeks": 4
     },
     {
       "month": "2022-03",
       "label": "Mar 2022",
-      "average_per_active_day": 0,
+      "average_per_workday": 0.0,
       "total_contributions": 0,
-      "active_days": 0
+      "weeks": 4
     },
     {
       "month": "2022-04",
       "label": "Apr 2022",
-      "average_per_active_day": 3.5,
+      "average_per_workday": 0.25,
       "total_contributions": 7,
-      "active_days": 2
+      "weeks": 4
     },
     {
       "month": "2022-05",
       "label": "May 2022",
-      "average_per_active_day": 3.230769230769231,
-      "total_contributions": 42,
-      "active_days": 13
+      "average_per_workday": 1.5428571428571431,
+      "total_contributions": 54,
+      "weeks": 5
     },
     {
       "month": "2022-06",
       "label": "Jun 2022",
-      "average_per_active_day": 3.6875,
-      "total_contributions": 59,
-      "active_days": 16
+      "average_per_workday": 1.7142857142857144,
+      "total_contributions": 48,
+      "weeks": 4
     },
     {
       "month": "2022-07",
       "label": "Jul 2022",
-      "average_per_active_day": 2.9444444444444446,
-      "total_contributions": 53,
-      "active_days": 18
+      "average_per_workday": 1.857142857142857,
+      "total_contributions": 52,
+      "weeks": 4
     },
     {
       "month": "2022-08",
       "label": "Aug 2022",
-      "average_per_active_day": 4.285714285714286,
-      "total_contributions": 30,
-      "active_days": 7
+      "average_per_workday": 1.0857142857142859,
+      "total_contributions": 38,
+      "weeks": 5
     },
     {
       "month": "2022-09",
       "label": "Sep 2022",
-      "average_per_active_day": 3.6153846153846154,
-      "total_contributions": 47,
-      "active_days": 13
+      "average_per_workday": 1.4285714285714284,
+      "total_contributions": 40,
+      "weeks": 4
     },
     {
       "month": "2022-10",
       "label": "Oct 2022",
-      "average_per_active_day": 3.357142857142857,
-      "total_contributions": 47,
-      "active_days": 14
+      "average_per_workday": 1.5142857142857142,
+      "total_contributions": 53,
+      "weeks": 5
     },
     {
       "month": "2022-11",
       "label": "Nov 2022",
-      "average_per_active_day": 5.2,
-      "total_contributions": 78,
-      "active_days": 15
+      "average_per_workday": 2.607142857142857,
+      "total_contributions": 73,
+      "weeks": 4
     },
     {
       "month": "2022-12",
       "label": "Dec 2022",
-      "average_per_active_day": 6.363636363636363,
-      "total_contributions": 70,
-      "active_days": 11
+      "average_per_workday": 2.428571428571429,
+      "total_contributions": 68,
+      "weeks": 4
     },
     {
       "month": "2023-01",
       "label": "Jan 2023",
-      "average_per_active_day": 6.0,
-      "total_contributions": 78,
-      "active_days": 13
+      "average_per_workday": 2.2857142857142856,
+      "total_contributions": 80,
+      "weeks": 5
     },
     {
       "month": "2023-02",
       "label": "Feb 2023",
-      "average_per_active_day": 5.818181818181818,
-      "total_contributions": 64,
-      "active_days": 11
+      "average_per_workday": 2.5357142857142856,
+      "total_contributions": 71,
+      "weeks": 4
     },
     {
       "month": "2023-03",
       "label": "Mar 2023",
-      "average_per_active_day": 6.25,
-      "total_contributions": 125,
-      "active_days": 20
+      "average_per_workday": 4.142857142857143,
+      "total_contributions": 116,
+      "weeks": 4
     },
     {
       "month": "2023-04",
       "label": "Apr 2023",
-      "average_per_active_day": 6.916666666666667,
+      "average_per_workday": 2.9642857142857144,
       "total_contributions": 83,
-      "active_days": 12
+      "weeks": 4
     },
     {
       "month": "2023-05",
       "label": "May 2023",
-      "average_per_active_day": 5.526315789473684,
-      "total_contributions": 105,
-      "active_days": 19
+      "average_per_workday": 3.628571428571429,
+      "total_contributions": 127,
+      "weeks": 5
     },
     {
       "month": "2023-06",
       "label": "Jun 2023",
-      "average_per_active_day": 8.789473684210526,
-      "total_contributions": 167,
-      "active_days": 19
+      "average_per_workday": 5.178571428571429,
+      "total_contributions": 145,
+      "weeks": 4
     },
     {
       "month": "2023-07",
       "label": "Jul 2023",
-      "average_per_active_day": 0,
-      "total_contributions": 0,
-      "active_days": 0
+      "average_per_workday": 0.6571428571428571,
+      "total_contributions": 23,
+      "weeks": 5
     },
     {
       "month": "2023-08",
       "label": "Aug 2023",
-      "average_per_active_day": 4.368421052631579,
-      "total_contributions": 83,
-      "active_days": 19
+      "average_per_workday": 2.142857142857143,
+      "total_contributions": 60,
+      "weeks": 4
     },
     {
       "month": "2023-09",
       "label": "Sep 2023",
-      "average_per_active_day": 6.214285714285714,
+      "average_per_workday": 3.107142857142857,
       "total_contributions": 87,
-      "active_days": 14
+      "weeks": 4
     },
     {
       "month": "2023-10",
       "label": "Oct 2023",
-      "average_per_active_day": 8.555555555555555,
-      "total_contributions": 154,
-      "active_days": 18
+      "average_per_workday": 6.257142857142857,
+      "total_contributions": 219,
+      "weeks": 5
     },
     {
       "month": "2023-11",
       "label": "Nov 2023",
-      "average_per_active_day": 14.571428571428571,
-      "total_contributions": 306,
-      "active_days": 21
+      "average_per_workday": 8.785714285714286,
+      "total_contributions": 246,
+      "weeks": 4
     },
     {
       "month": "2023-12",
       "label": "Dec 2023",
-      "average_per_active_day": 14.5625,
-      "total_contributions": 233,
-      "active_days": 16
+      "average_per_workday": 8.142857142857142,
+      "total_contributions": 228,
+      "weeks": 4
     },
     {
       "month": "2024-01",
       "label": "Jan 2024",
-      "average_per_active_day": 9.5,
-      "total_contributions": 133,
-      "active_days": 14
+      "average_per_workday": 4.142857142857143,
+      "total_contributions": 145,
+      "weeks": 5
     },
     {
       "month": "2024-02",
       "label": "Feb 2024",
-      "average_per_active_day": 7.333333333333333,
-      "total_contributions": 110,
-      "active_days": 15
+      "average_per_workday": 3.607142857142857,
+      "total_contributions": 101,
+      "weeks": 4
     },
     {
       "month": "2024-03",
       "label": "Mar 2024",
-      "average_per_active_day": 11.1,
-      "total_contributions": 222,
-      "active_days": 20
+      "average_per_workday": 7.821428571428572,
+      "total_contributions": 219,
+      "weeks": 4
     },
     {
       "month": "2024-04",
       "label": "Apr 2024",
-      "average_per_active_day": 8.352941176470589,
-      "total_contributions": 142,
-      "active_days": 17
+      "average_per_workday": 4.2,
+      "total_contributions": 147,
+      "weeks": 5
     },
     {
       "month": "2024-05",
       "label": "May 2024",
-      "average_per_active_day": 7.222222222222222,
-      "total_contributions": 130,
-      "active_days": 18
+      "average_per_workday": 4.5357142857142865,
+      "total_contributions": 127,
+      "weeks": 4
     },
     {
       "month": "2024-06",
       "label": "Jun 2024",
-      "average_per_active_day": 14.058823529411764,
-      "total_contributions": 239,
-      "active_days": 17
+      "average_per_workday": 8.464285714285714,
+      "total_contributions": 237,
+      "weeks": 4
     },
     {
       "month": "2024-07",
       "label": "Jul 2024",
-      "average_per_active_day": 1.6666666666666667,
+      "average_per_workday": 0.2857142857142857,
       "total_contributions": 10,
-      "active_days": 6
+      "weeks": 5
     },
     {
       "month": "2024-08",
       "label": "Aug 2024",
-      "average_per_active_day": 10.578947368421053,
+      "average_per_workday": 7.178571428571429,
       "total_contributions": 201,
-      "active_days": 19
+      "weeks": 4
     },
     {
       "month": "2024-09",
       "label": "Sep 2024",
-      "average_per_active_day": 1.0,
-      "total_contributions": 1,
-      "active_days": 1
+      "average_per_workday": 0.6,
+      "total_contributions": 21,
+      "weeks": 5
     },
     {
       "month": "2024-10",
       "label": "Oct 2024",
-      "average_per_active_day": 4.1875,
-      "total_contributions": 67,
-      "active_days": 16
+      "average_per_workday": 2.0,
+      "total_contributions": 56,
+      "weeks": 4
     },
     {
       "month": "2024-11",
       "label": "Nov 2024",
-      "average_per_active_day": 6.235294117647059,
-      "total_contributions": 106,
-      "active_days": 17
+      "average_per_workday": 3.642857142857143,
+      "total_contributions": 102,
+      "weeks": 4
     },
     {
       "month": "2024-12",
       "label": "Dec 2024",
-      "average_per_active_day": 9.166666666666666,
-      "total_contributions": 110,
-      "active_days": 12
+      "average_per_workday": 3.0,
+      "total_contributions": 105,
+      "weeks": 5
     },
     {
       "month": "2025-01",
       "label": "Jan 2025",
-      "average_per_active_day": 6.0,
+      "average_per_workday": 3.857142857142857,
       "total_contributions": 108,
-      "active_days": 18
+      "weeks": 4
     },
     {
       "month": "2025-02",
       "label": "Feb 2025",
-      "average_per_active_day": 7.214285714285714,
+      "average_per_workday": 3.6071428571428568,
       "total_contributions": 101,
-      "active_days": 14
+      "weeks": 4
     },
     {
       "month": "2025-03",
       "label": "Mar 2025",
-      "average_per_active_day": 7.117647058823529,
-      "total_contributions": 121,
-      "active_days": 17
+      "average_per_workday": 4.428571428571429,
+      "total_contributions": 155,
+      "weeks": 5
     },
     {
       "month": "2025-04",
       "label": "Apr 2025",
-      "average_per_active_day": 7.75,
-      "total_contributions": 155,
-      "active_days": 20
+      "average_per_workday": 4.321428571428571,
+      "total_contributions": 121,
+      "weeks": 4
     },
     {
       "month": "2025-05",
       "label": "May 2025",
-      "average_per_active_day": 10.294117647058824,
+      "average_per_workday": 6.25,
       "total_contributions": 175,
-      "active_days": 17
+      "weeks": 4
     },
     {
       "month": "2025-06",
       "label": "Jun 2025",
-      "average_per_active_day": 7.0,
-      "total_contributions": 126,
-      "active_days": 18
+      "average_per_workday": 4.514285714285714,
+      "total_contributions": 158,
+      "weeks": 5
     },
     {
       "month": "2025-07",
       "label": "Jul 2025",
-      "average_per_active_day": 5.833333333333333,
-      "total_contributions": 35,
-      "active_days": 6
+      "average_per_workday": 0.10714285714285714,
+      "total_contributions": 3,
+      "weeks": 4
     },
     {
       "month": "2025-08",
       "label": "Aug 2025",
-      "average_per_active_day": 15.38888888888889,
+      "average_per_workday": 9.892857142857142,
       "total_contributions": 277,
-      "active_days": 18
+      "weeks": 4
     },
     {
       "month": "2025-09",
       "label": "Sep 2025",
-      "average_per_active_day": 12.38888888888889,
-      "total_contributions": 223,
-      "active_days": 18
+      "average_per_workday": 7.2857142857142865,
+      "total_contributions": 255,
+      "weeks": 5
     },
     {
       "month": "2025-10",
       "label": "Oct 2025",
-      "average_per_active_day": 14.0,
-      "total_contributions": 322,
-      "active_days": 23
+      "average_per_workday": 10.357142857142858,
+      "total_contributions": 290,
+      "weeks": 4
     },
     {
       "month": "2025-11",
       "label": "Nov 2025",
-      "average_per_active_day": 13.222222222222221,
-      "total_contributions": 238,
-      "active_days": 18
+      "average_per_workday": 8.642857142857142,
+      "total_contributions": 242,
+      "weeks": 4
     }
   ]
 }
