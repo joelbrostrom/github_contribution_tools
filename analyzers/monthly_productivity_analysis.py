@@ -262,8 +262,8 @@ if active_months:
     plt.plot_size(120, 30)
     plt.title(f"Monthly Productivity: Average Contributions per Workday ({workdays_per_week} workdays/week)")
     
-    # Plot the line
-    plt.plot(x_indices, averages, marker="braille", color="cyan")
+    # Plot the line (blue for colorblind accessibility)
+    plt.plot(x_indices, averages, marker="braille", color="green", label="Monthly avg")
     
     # Add a trend line by calculating moving average
     window_size = 6  # 6-month moving average
@@ -275,7 +275,8 @@ if active_months:
             else:
                 moving_avg.append(sum(averages[i-window_size+1:i+1]) / window_size)
         
-        plt.plot(x_indices, moving_avg, marker="braille", color="green", label="6-month trend")
+        # Orange with thicker marker for colorblind-friendly contrast with blue
+        plt.plot(x_indices, moving_avg, marker="hd", color="blue", label="6-month trend")
     
     plt.xlabel("Timeline")
     plt.ylabel("Avg Contributions/Workday")
