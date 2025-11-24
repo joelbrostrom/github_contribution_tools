@@ -121,15 +121,27 @@ def fetch_and_display_contributions(username, token, year):
     collection = data["data"]["user"]["contributionsCollection"]
     calendar = collection["contributionCalendar"]
     
+    # Calculate the categorized contributions
+    commits = collection['totalCommitContributions']
+    issues = collection['totalIssueContributions']
+    prs = collection['totalPullRequestContributions']
+    reviews = collection['totalPullRequestReviewContributions']
+    total = calendar['totalContributions']
+    
+    # Calculate private contributions (unaccounted for in public categories)
+    categorized_sum = commits + issues + prs + reviews
+    private = total - categorized_sum
+    
     # Summary
     print(f"\n{'='*60}")
     print(f"CONTRIBUTION SUMMARY ({year})")
     print(f"{'='*60}")
-    print(f"Total Contributions (all types): {calendar['totalContributions']}")
-    print(f"  - Commits:                     {collection['totalCommitContributions']}")
-    print(f"  - Issues:                      {collection['totalIssueContributions']}")
-    print(f"  - Pull Requests:               {collection['totalPullRequestContributions']}")
-    print(f"  - PR Reviews:                  {collection['totalPullRequestReviewContributions']}")
+    print(f"Total Contributions (all types): {total}")
+    print(f"  - Commits:                     {commits}")
+    print(f"  - Issues:                      {issues}")
+    print(f"  - Pull Requests:               {prs}")
+    print(f"  - PR Reviews:                  {reviews}")
+    print(f"  - Private:                     {private}")
     print(f"{'='*60}\n")
     
     # Aggregate by weekday
