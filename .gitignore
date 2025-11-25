@@ -1,5 +1,6 @@
 # Generated data files
 monthly_productivity_data.json
+monthly_code_metrics_data.json
 
 # Python
 __pycache__/
