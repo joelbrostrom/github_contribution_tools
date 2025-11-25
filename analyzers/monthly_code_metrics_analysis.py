@@ -9,6 +9,7 @@ from Pull Requests, filtering out vacation days and showing only active working 
 import argparse
 import json
 import os
+import time
 from collections import defaultdict
 from datetime import datetime, timedelta
 
@@ -111,10 +112,12 @@ all_prs = []
 print("Fetching Pull Requests (including private repositories)...")
 print("This may take a while for users with many PRs...\n")
 
-# Fetch all PRs with pagination
+# Fetch all PRs with pagination and retry logic
 has_next = True
 cursor = None
 total_count = None
+max_retries = 3
+retry_delay = 5  # seconds
 
 while has_next:
     variables = {
@@ -122,39 +125,64 @@ while has_next:
         "after": cursor
     }
     
-    try:
-        resp = requests.post(
-            "https://api.github.com/graphql",
-            json={"query": pr_query, "variables": variables},
-            headers={"Authorization": f"bearer {TOKEN}"}
-        )
-        resp.raise_for_status()
-        data = resp.json()
-        
-        if "errors" in data:
-            print(f"⚠ Error fetching PRs: {data['errors']}")
+    # Retry loop for handling temporary errors
+    for attempt in range(max_retries):
+        try:
+            resp = requests.post(
+                "https://api.github.com/graphql",
+                json={"query": pr_query, "variables": variables},
+                headers={"Authorization": f"bearer {TOKEN}"},
+                timeout=30
+            )
+            resp.raise_for_status()
+            data = resp.json()
+            
+            if "errors" in data:
+                print(f"\n⚠ GraphQL Error: {data['errors']}")
+                if attempt < max_retries - 1:
+                    print(f"   Retrying in {retry_delay} seconds... (attempt {attempt + 2}/{max_retries})")
+                    time.sleep(retry_delay)
+                    continue
+                else:
+                    print(f"   Max retries reached. Continuing with {len(all_prs)} PRs fetched so far.")
+                    has_next = False
+                    break
+            
+            pr_data = data["data"]["user"]["pullRequests"]
+            
+            # Get total count on first iteration
+            if total_count is None:
+                total_count = pr_data["totalCount"]
+                print(f"Found {total_count} total PRs to analyze...")
+            
+            # Extract PRs
+            prs = pr_data["nodes"]
+            all_prs.extend(prs)
+            
+            print(f"Fetched {len(all_prs)}/{total_count} PRs...", end="\r", flush=True)
+            
+            page_info = pr_data["pageInfo"]
+            has_next = page_info["hasNextPage"]
+            cursor = page_info.get("endCursor")
+            
+            # Success - break out of retry loop
             break
-        
-        pr_data = data["data"]["user"]["pullRequests"]
-        
-        # Get total count on first iteration
-        if total_count is None:
-            total_count = pr_data["totalCount"]
-            print(f"Found {total_count} total PRs to analyze...")
-        
-        # Extract PRs
-        prs = pr_data["nodes"]
-        all_prs.extend(prs)
-        
-        print(f"Fetched {len(all_prs)}/{total_count} PRs...", end="\r", flush=True)
-        
-        page_info = pr_data["pageInfo"]
-        has_next = page_info["hasNextPage"]
-        cursor = page_info.get("endCursor")
-        
-    except Exception as e:
-        print(f"\n⚠ Error: {e}")
-        break
+            
+        except requests.exceptions.RequestException as e:
+            if attempt < max_retries - 1:
+                print(f"\n⚠ Network error: {e}")
+                print(f"   Retrying in {retry_delay} seconds... (attempt {attempt + 2}/{max_retries})")
+                time.sleep(retry_delay)
+            else:
+                print(f"\n⚠ Error after {max_retries} attempts: {e}")
+                print(f"   Continuing with {len(all_prs)} PRs fetched so far.")
+                has_next = False
+                break
+        except Exception as e:
+            print(f"\n⚠ Unexpected error: {e}")
+            print(f"   Continuing with {len(all_prs)} PRs fetched so far.")
+            has_next = False
+            break
 
 print(f"\n")
 
@@ -172,6 +200,15 @@ public_prs = len(all_prs) - private_prs
 
 print(f"  - Public PRs:  {public_prs}")
 print(f"  - Private PRs: {private_prs}")
+
+# Warn if we didn't fetch all PRs
+if total_count and len(all_prs) < total_count:
+    missing = total_count - len(all_prs)
+    percentage = (len(all_prs) / total_count) * 100
+    print(f"\n⚠️  Warning: Only fetched {len(all_prs)}/{total_count} PRs ({percentage:.1f}%)")
+    print(f"   Missing {missing} PRs due to API errors. Results may be incomplete.")
+    print(f"   Try running the script again to fetch more data.")
+
 print()
 
 # Group by week and track metrics
