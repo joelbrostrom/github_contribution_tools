@@ -24,6 +24,7 @@ analyzers/work_summary.py -u USERNAME -t YOUR_TOKEN --custom --start 2025-01-01 
 ## Use Cases
 
 ### 1. Time Tracking / Time Logging
+
 Export your daily work summary to add to time tracking systems:
 
 ```bash
@@ -34,6 +35,7 @@ analyzers/work_summary.py -u USERNAME -t TOKEN --today --include-stats
 ```
 
 ### 2. Status Reports
+
 Generate markdown reports for your manager or team:
 
 ```bash
@@ -45,6 +47,7 @@ analyzers/work_summary.py -u USERNAME -t TOKEN --this-month --format markdown --
 ```
 
 ### 3. Personal Productivity Tracking
+
 Review what you've accomplished over any period:
 
 ```bash
@@ -71,6 +74,7 @@ analyzers/work_summary.py -u USERNAME -t TOKEN --last-month --include-stats
 ## Output Formats
 
 ### Text Format (Default)
+
 Clean, terminal-friendly format perfect for copying into text fields:
 
 ```bash
@@ -78,6 +82,7 @@ analyzers/work_summary.py -u USERNAME -t TOKEN --today --format text
 ```
 
 ### Markdown Format
+
 Perfect for documentation, GitHub issues, or Slack messages:
 
 ```bash
@@ -85,12 +90,14 @@ analyzers/work_summary.py -u USERNAME -t TOKEN --today --format markdown
 ```
 
 Features:
+
 - Clickable PR links
 - Status emojis (🟢 merged, 🔵 open, 🔴 closed)
 - Formatted statistics
 - Clean hierarchy
 
 ### JSON Format
+
 Structured data for parsing or integration with other tools:
 
 ```bash
@@ -100,6 +107,7 @@ analyzers/work_summary.py -u USERNAME -t TOKEN --today --format json
 ## Grouping Options
 
 ### Group by Repository (Default)
+
 PRs organized by repository:
 
 ```bash
@@ -107,6 +115,7 @@ analyzers/work_summary.py -u USERNAME -t TOKEN --last-week --group-by repo
 ```
 
 ### Group by Date
+
 PRs organized chronologically:
 
 ```bash
@@ -114,6 +123,7 @@ analyzers/work_summary.py -u USERNAME -t TOKEN --last-week --group-by date
 ```
 
 ### No Grouping
+
 Flat list of all PRs:
 
 ```bash
@@ -123,6 +133,7 @@ analyzers/work_summary.py -u USERNAME -t TOKEN --last-week --group-by none
 ## Export Options
 
 ### Export to File
+
 Save summary to a file instead of just printing:
 
 ```bash
@@ -149,27 +160,35 @@ analyzers/work_summary.py -u USERNAME -t TOKEN --today --include-stats
 ## Examples
 
 ### Daily Stand-up Report
+
 ```bash
 analyzers/work_summary.py -u joelbrostrom -t $GITHUB_TOKEN --yesterday --format markdown --include-stats
 ```
+
 Use the output for your daily stand-up to show what you accomplished yesterday.
 
 ### Weekly Team Update
+
 ```bash
 analyzers/work_summary.py -u joelbrostrom -t $GITHUB_TOKEN --this-week --format markdown --include-stats --export weekly-update.md
 ```
+
 Generate a weekly update document to share with your team.
 
 ### Time Logging
+
 ```bash
 analyzers/work_summary.py -u joelbrostrom -t $GITHUB_TOKEN --today --format text
 ```
+
 Copy the output directly into your time tracking system's description field.
 
 ### Quarterly Review
+
 ```bash
 analyzers/work_summary.py -u joelbrostrom -t $GITHUB_TOKEN --custom --start 2025-01-01 --end 2025-03-31 --format markdown --include-stats --export q1-2025.md
 ```
+
 Generate a comprehensive report for performance reviews.
 
 ## Environment Variables
@@ -192,18 +211,21 @@ export GITHUB_TOKEN="ghp_your_token_here"
 ## Tips
 
 1. **Alias for Quick Access**: Add to your shell config:
+
    ```bash
    alias worktoday="analyzers/work_summary.py -u YOUR_USERNAME -t $GITHUB_TOKEN --today --include-stats"
    alias workweek="analyzers/work_summary.py -u YOUR_USERNAME -t $GITHUB_TOKEN --last-week --format markdown --include-stats"
    ```
 
 2. **Automation**: Schedule daily summaries:
+
    ```bash
    # Add to crontab to email yourself daily summaries
    0 18 * * * cd ~/path/to/repo && analyzers/work_summary.py -u USERNAME -t TOKEN --today --format markdown --export /tmp/today.md
    ```
 
 3. **Integration**: Pipe to clipboard:
+
    ```bash
    # macOS
    analyzers/work_summary.py -u USERNAME -t TOKEN --today | pbcopy
@@ -215,8 +237,8 @@ export GITHUB_TOKEN="ghp_your_token_here"
 ## Required Token Permissions
 
 The GitHub token needs:
+
 - `repo` scope (to access private repositories)
 - `read:org` scope (to access organization repositories)
 
 See the main README for instructions on creating a token.
-
