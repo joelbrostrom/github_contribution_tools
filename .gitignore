@@ -21,3 +21,4 @@ ENV/
 
 # Documentation
 docs/COMMANDS.md
+config/config.sh

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Example configuration file
-# Copy this to config.sh and fill in your details
+# Copy or rename this to config.sh and fill in your details
 
 # Your GitHub Personal Access Token
 # Get one at: https://github.com/settings/tokens
