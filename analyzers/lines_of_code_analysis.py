@@ -404,6 +404,21 @@ def _rolling_average(values, window=3):
         rolling.append(sum(window_values) / len(window_values) if window_values else 0)
     return rolling
 
+def _cap_outliers(values, multiplier=1.5):
+    """Cap outlier values using IQR fencing.
+
+    Values above Q3 + multiplier * IQR are replaced with the upper fence.
+    """
+    if len(values) < 4:
+        return list(values)
+    sorted_vals = sorted(values)
+    n = len(sorted_vals)
+    q1 = sorted_vals[n // 4]
+    q3 = sorted_vals[(3 * n) // 4]
+    iqr = q3 - q1
+    upper_fence = q3 + multiplier * iqr
+    return [min(v, upper_fence) for v in values]
+
 # Create visual graphs using plotext
 if active_months:
     # Prepare data for plotting
@@ -529,9 +544,43 @@ if active_months:
     plt.grid(True, True)
     plt.show()
     
+    # Outlier-capped combined rolling average
+    capped_additions = _cap_outliers(additions)
+    capped_deletions = _cap_outliers(deletions)
+    capped_totals = _cap_outliers(totals)
+
+    capped_rolling_additions = _rolling_average(capped_additions, window=rolling_window)
+    capped_rolling_deletions = _rolling_average(capped_deletions, window=rolling_window)
+    capped_rolling_totals = _rolling_average(capped_totals, window=rolling_window)
+
+    num_capped = sum(1 for a, b in zip(totals, capped_totals) if a != b)
+
+    print("\n" + "="*90)
+    print(f"MONTHLY CODE METRICS - {rolling_window}-MONTH ROLLING AVERAGE (OUTLIERS CAPPED)")
+    print("="*90 + "\n")
+
+    plt.clear_figure()
+    plt.plot_size(120, 30)
+    plt.title(f"{rolling_window}-Month Rolling Average: Combined Lines per Workday (outliers capped)")
+
+    plt.plot(x_indices, capped_rolling_additions, marker="hd", color="green", label="Lines added")
+    plt.plot(x_indices, capped_rolling_deletions, marker="hd", color="red", label="Lines deleted")
+    plt.plot(x_indices, capped_rolling_totals, marker="hd", color="cyan", label="Total changes")
+
+    plt.xlabel("Timeline")
+    plt.ylabel("Avg Lines/Workday")
+
+    plt.xticks(x_indices, x_labels_to_show)
+    plt.grid(True, True)
+    plt.show()
+
     print("\n" + "="*90)
     print(f"Note: Averages calculated per {workdays_per_week} workdays/week")
     print(f"Combined graph shows a {rolling_window}-month rolling average to smooth short-term spikes.")
+    if num_capped > 0:
+        print(f"Outlier-capped graph: {num_capped} month(s) had values capped using IQR fencing (Q3 + 1.5×IQR).")
+    else:
+        print("Outlier-capped graph: no outliers detected.")
     print("="*90 + "\n")
 else:
     print("No active months to display.")
