@@ -29,6 +29,7 @@ Examples:
   %(prog)s -u octocat -t ghp_xxxxx --detailed
   %(prog)s -u octocat --workdays-per-week 6
   %(prog)s -u octocat --local-data     # Use cached data instead of fetching
+  %(prog)s -u octocat --start-date 2023-01 --end-date 2025-06
   
 Environment Variables:
   GITHUB_TOKEN    GitHub personal access token (alternative to -t)
@@ -44,7 +45,18 @@ parser.add_argument('--workdays-per-week', type=int, default=5,
                     help='Number of workdays per week (default: 5 for Mon-Fri)')
 parser.add_argument('--local-data', action='store_true',
                     help=f'Use local cached data from {LOCAL_DATA_FILE} instead of fetching from GitHub')
+parser.add_argument('--start-date', type=str, default=None,
+                    help='Only show data from this month onward (format: YYYY-MM, e.g. 2023-01)')
+parser.add_argument('--end-date', type=str, default=None,
+                    help='Only show data up to this month (format: YYYY-MM, e.g. 2025-06)')
 args = parser.parse_args()
+
+for _date_arg, _date_val in [('--start-date', args.start_date), ('--end-date', args.end_date)]:
+    if _date_val is not None:
+        try:
+            datetime.strptime(_date_val, "%Y-%m")
+        except ValueError:
+            parser.error(f"{_date_arg} must be in YYYY-MM format (got '{_date_val}')")
 
 # Check if using local data
 
@@ -332,6 +344,17 @@ else:
             "week_fraction": stats["week_fraction"]
         })
 
+# Filter monthly_data to the requested date range
+_start = args.start_date or monthly_data[0]["month"] if monthly_data else None
+_end = args.end_date or monthly_data[-1]["month"] if monthly_data else None
+if _start or _end:
+    monthly_data = [m for m in monthly_data if (_start is None or m["month"] >= _start)
+                    and (_end is None or m["month"] <= _end)]
+    if args.start_date or args.end_date:
+        label_from = monthly_data[0]["label"] if monthly_data else "N/A"
+        label_to = monthly_data[-1]["label"] if monthly_data else "N/A"
+        print(f"Date filter: {label_from} — {label_to} ({len(monthly_data)} months)\n")
+
 # Show detailed monthly breakdown if flag is set
 if args.detailed:
     print("\n" + "="*110)
@@ -373,9 +396,10 @@ if active_months:
     max_deletions_month = max(monthly_data, key=lambda x: x["avg_deletions"])
     max_total_month = max(monthly_data, key=lambda x: x["avg_total"])
     
-    print(f"Total lines added (all time):       {total_additions:,}")
-    print(f"Total lines deleted (all time):     {total_deletions:,}")
-    print(f"Total changes (all time):           {total_changes:,}")
+    _range_label = "in range" if args.start_date or args.end_date else "all time"
+    print(f"Total lines added ({_range_label}):       {total_additions:,}")
+    print(f"Total lines deleted ({_range_label}):     {total_deletions:,}")
+    print(f"Total changes ({_range_label}):           {total_changes:,}")
     print()
     print(f"Active months analyzed:             {len(active_months)}")
     print(f"Overall average additions/workday:  {overall_avg_additions:.1f} lines")
